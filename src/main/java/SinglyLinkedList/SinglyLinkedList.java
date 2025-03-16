@@ -75,7 +75,7 @@ public class SinglyLinkedList<T> implements Iterable<T> {
         sb.append("[");
         while (trav !=null){
             sb.append(trav.data);
-            if(trav.next !=null)sb.append(",");
+            if(trav.next !=null)sb.append("->");
             trav=trav.next;
         }
         sb.append("]");

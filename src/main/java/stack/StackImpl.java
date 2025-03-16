@@ -25,7 +25,15 @@ public class StackImpl<T> implements Iterable<T> {
         }
     }
 
-
+    public void  push(T data){
+        if(size == 0){
+            head=tail=new Node<>(data,null,null);
+        }else{
+            tail.next = new Node<>(data,null,tail);
+            tail = tail.next;
+        }
+        size++;
+    }
 
 
 
@@ -33,7 +41,7 @@ public class StackImpl<T> implements Iterable<T> {
     @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
-           private StackImpl.Node<T> trav = head;
+           private Node<T> trav = head;
             @Override
             public boolean hasNext() {
                 return trav !=null;
@@ -53,10 +61,12 @@ public class StackImpl<T> implements Iterable<T> {
         StringBuilder sb = new StringBuilder();
         Node<T> trav = head;
         sb.append("[");
-        while(trav == null){
+        while(trav != null){
             sb.append(trav.data);
+            if (trav.next != null)sb.append(",");
             trav = trav.next;
         }
+        sb.append("]");
         return sb.toString();
     }
 
