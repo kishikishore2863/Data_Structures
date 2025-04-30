@@ -2,12 +2,17 @@ package stack;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class Stack1<T> implements Iterable<T> {
 
     private int size = 0;
     private Node<T> head = null;
     private Node<T> tail = null;
+
+    Queue<Integer> queue = new PriorityQueue<>();
+
 
 
 
@@ -86,5 +91,4 @@ public class Stack1<T> implements Iterable<T> {
              sb.append("]");
             return sb.toString();
         }
-
 }
