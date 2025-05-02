@@ -22,9 +22,9 @@ public class Programs {
 //        p.armstrong(153);
 //        p.armstrong(143);
 //        p.fibnocci(5);
-
-        p.sumOfDigits(1234);
-
+//        p.sumOfDigits(1234);
+//        p.countVowelAndConsonants("hello");
+        p.tables(3);
 
 
 
@@ -200,7 +200,34 @@ public class Programs {
        System.out.println(sum);
    }
 
+    public void countVowelAndConsonants(String str){
+        int vowel =0;
+        int cons = 0;
 
+        for(int i=0; i<str.length(); i++){
+            if((str.charAt(i)>='a'&& str.charAt(i)<='z') || (str.charAt(i)>='A'&& str.charAt(i)<='Z') ){
+                if(str.charAt(i)=='a'|| str.charAt(i)=='e'|| str.charAt(i)=='i'|| str.charAt(i)=='o'|| str.charAt(i)=='u'
+                || str.charAt(i)=='A'|| str.charAt(i)=='E'|| str.charAt(i)=='I'|| str.charAt(i)=='O'|| str.charAt(i)=='U'){
+                  vowel++;
+                }else{
+                  cons++;
+                }
+            }
+        }
+
+        System.out.println("vowel:"+vowel);
+        System.out.println("cons:"+cons);
+
+    }
+
+
+    public void tables(int n){
+        for(int i=1; i<=10; i++){
+            int mul = n*i;
+            System.out.println(n+"x"+i+"="+mul);
+        }
+    }
+     
 
 
 
