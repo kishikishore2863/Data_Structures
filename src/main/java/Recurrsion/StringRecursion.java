@@ -1,6 +1,7 @@
 package Recurrsion;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class StringRecursion {
@@ -94,4 +95,54 @@ class Solution1 {
         }
         return ans;
     }
+
+
+}
+
+class BasicRecursion{
+    static int ans=1;
+    public static void main(String[] args) {
+//       int res = sumOfN(3);
+//        System.out.println(res);
+//        int [] arr = {1,2,3,4,5,6,7,8,9};
+//
+//        int [] out = reverse(arr,0, arr.length-1);
+//        System.out.println(Arrays.toString(out));
+
+        System.out.println(palindrome("malayala"));
+    }
+    public static int sumOfN(int n ){
+        if(n==0){
+            return ans;
+        }
+        ans = ans*n;
+        return sumOfN(n-1);
+
+
+    }
+
+    static int[] reverse(int [] arr ,int start, int end){
+        if(start == arr.length/2){
+            return arr;
+        }
+
+        int temp =arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+        return reverse(arr,start+1,end-1);
+
+    }
+
+    static boolean palindrome(String str ){
+        System.out.println(reversed(str,str.length()-1,""));
+       return  str.equals(reversed(str,str.length()-1,""));
+    }
+
+    static  String reversed(String str ,int index, String s){
+        if(index < 0){
+            return s;
+        }
+        return str.charAt(index)+reversed(str,index-1,s);
+    }
+
 }
