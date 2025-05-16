@@ -11,5 +11,18 @@ public class ListNode {
         this.val = val;
         this.next = next;
     }
+    public static void display(ListNode head){
+//        System.out.println();
+        displayPrivate(head);
+//        System.out.println();
+    }
+
+    private static void displayPrivate(ListNode head){
+        if(head == null){
+            return;
+        }
+        System.out.print(head.val);
+        display(head.next);
+    }
 }
 
