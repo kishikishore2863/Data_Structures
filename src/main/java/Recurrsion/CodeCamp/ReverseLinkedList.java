@@ -33,6 +33,7 @@ public class ReverseLinkedList {
         head.next.next = head;
         System.out.println(head.next.val+"=null");
         head.next = null;
+        System.out.println(p.val);
         return p;
     }
 }

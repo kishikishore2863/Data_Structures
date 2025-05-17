@@ -21,7 +21,7 @@ public class ListNode {
         if(head == null){
             return;
         }
-        System.out.print(head.val);
+        System.out.print(head.val+" -> ");
         display(head.next);
     }
 }
