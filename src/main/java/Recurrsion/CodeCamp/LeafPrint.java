@@ -2,6 +2,9 @@ package Recurrsion.CodeCamp;
 
 import Leetcode.TreeNode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LeafPrint {
     public static void main(String[] args) {
 //        TreeNode root = new TreeNode(1);
@@ -37,7 +40,5 @@ public class LeafPrint {
 
         leafPrint(root.left);
         leafPrint(root.right);
-
-
     }
 }
