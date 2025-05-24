@@ -52,7 +52,6 @@ public class RemoveDuplicatesFromSorted {
               }
               fast=fast.next;
 
-
         }
 
 
