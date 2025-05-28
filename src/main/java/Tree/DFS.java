@@ -11,7 +11,7 @@ public class DFS {
 
    static Map<Integer,Integer> dic = new HashMap<>();
    static List<List<Integer>> pathSum = new ArrayList<>();
-   static List<Integer> list;
+   static List<Integer>  list = new ArrayList<>();
 
     public static void main(String[] args) {
        TreeNode five = new TreeNode(5);
@@ -23,6 +23,7 @@ public class DFS {
        TreeNode thirteen = new TreeNode(13);
        TreeNode four1 = new TreeNode(4);
        TreeNode one = new TreeNode(1);
+       TreeNode five1 = new TreeNode(5);
 
        TreeNode root = five;
        five.left = four;
@@ -33,6 +34,7 @@ public class DFS {
        eight.right = four1;
        four1.right = one;
        eight.left = thirteen;
+       four1.left = five1;
 
 
         System.out.println(pathSum(root,22));
@@ -71,6 +73,7 @@ public class DFS {
 
     public static List<List<Integer>> pathSum(TreeNode root, int targetSum) {
        pathSumHelper(root,targetSum,0);
+        System.out.println(list);
        return pathSum;
 
     }
@@ -81,25 +84,20 @@ public class DFS {
         }
         if(root.left == null && root.right == null){
             if(targetSum==count+ root.val) {
-               list = new ArrayList<>();
+                list.add(root.val);
+               return;
             }
+
         }
-
-
         count=count+root.val;
+        System.out.println(list);
+
+
+
 
         pathSumHelper(root.left,targetSum,count);
         pathSumHelper(root.right,targetSum,count);
-
-        if(count<0) {
-            list.add(root.val);
-            count=count-root.val;
-        }
-        if(count==0){
-            pathSum.add(list);
-        }
-
-
+        list.add(root.val);
     }
 
 
