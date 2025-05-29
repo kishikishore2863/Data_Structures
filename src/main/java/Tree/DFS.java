@@ -72,6 +72,7 @@ public class DFS {
 
 
     public static List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+
        pathSumHelper(root,targetSum,0);
         System.out.println(list);
        return pathSum;
@@ -88,16 +89,14 @@ public class DFS {
                return;
             }
 
+        }else {
+            count=count+root.val;
+            System.out.println(list);
+            pathSumHelper(root.left,targetSum,count);
+            pathSumHelper(root.right,targetSum,count);
+            list.add(root.val);
         }
-        count=count+root.val;
-        System.out.println(list);
 
-
-
-
-        pathSumHelper(root.left,targetSum,count);
-        pathSumHelper(root.right,targetSum,count);
-        list.add(root.val);
     }
 
 
