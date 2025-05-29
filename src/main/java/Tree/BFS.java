@@ -2,7 +2,9 @@ package Tree;
 
 import Leetcode.TreeNode;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BFS {
@@ -17,8 +19,13 @@ public class BFS {
         one.left = two;
         two.right = five;
         one.right = three;
-//        practice(root);
-        practise2(root);
+        printAllNodes(root);
+//        System.out.println();
+//      int res = deepestLeavesSum(root);
+//        System.out.println(res);
+
+       List<List<Integer>> res =  zigzagLevelOrder(root);
+        System.out.println(res);
     }
 
     public static void printAllNodes(TreeNode root) {
@@ -33,7 +40,7 @@ public class BFS {
                 TreeNode node = queue.remove();
 
                 // do some logic here on the current node
-                System.out.print(node.val);
+                System.out.print(node.val+"-");
 
                 // put the next level onto the queue
                 if (node.left != null) {
@@ -102,5 +109,127 @@ public class BFS {
             }
         }
 
+    }
+
+
+    private static List<Integer> code(TreeNode root){
+        List<Integer> list = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while(!queue.isEmpty()){
+            int levelCount = queue.size();
+
+            for(int i=0; i<levelCount; i++){
+                TreeNode node = queue.remove();
+                if(i == levelCount-1){
+                    list.add(node.val);
+                }
+
+                if(node.left != null){
+                    queue.add(node.left);
+                }
+                if(node.right != null){
+                    queue.add(node.right);
+                }
+
+            }
+        }
+        return list;
+    }
+
+
+
+    public static int deepestLeavesSum(TreeNode root) {
+        int depth = maxDepth(root);
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        int sum =0;
+        int curr =0;
+        while(!queue.isEmpty()){
+            int level = queue.size();
+            curr++;
+            for(int i=0; i<level; i++){
+                TreeNode node = queue.remove();
+
+                if(curr == depth){
+                    sum += node.val;
+                }
+
+                if(node.left != null){
+                    queue.add(node.left);
+                }
+                if(node.right != null){
+                    queue.add(node.right);
+                }
+
+            }
+        }
+        return sum;
+    }
+
+    public static int maxDepth(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+
+        int left = maxDepth(root.left);
+        int right = maxDepth(root.right);
+
+        return Math.max(left,right)+1;
+
+    }
+
+
+
+
+    public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        if(root == null)return new ArrayList<>();
+        List<List<Integer>> zigzag = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        int count =0;
+        while(!queue.isEmpty()){
+            int level = queue.size();
+            count++;
+            if(count%2 == 0){
+                List<Integer> list = new ArrayList<>();
+                for(int i=level-1; i>=0; i--){
+                    TreeNode node = queue.remove();
+                    list.add(node.val);
+
+                    if(node.left != null){
+                        queue.add(node.left);
+                    }
+                    if(node.right != null){
+                        queue.add(node.right);
+                    }
+
+                }
+                zigzag.add(list);
+
+            }else{
+                List<Integer> list = new ArrayList<>();
+                for(int i=0; i<level; i++){
+                    TreeNode node = queue.remove();
+                    list.add(node.val);
+
+                    if(node.left != null){
+                        queue.add(node.left);
+                    }
+                    if(node.right != null){
+                        queue.add(node.right);
+                    }
+
+                }
+                zigzag.add(list);
+            }
+            System.out.println(zigzag);
+
+        }
+        return zigzag;
     }
 }
