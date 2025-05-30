@@ -2,30 +2,36 @@ package Tree;
 
 import Leetcode.TreeNode;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class BFS {
     public static void main(String[] args) {
-        TreeNode one = new TreeNode(1);
-        TreeNode two = new TreeNode(2);
+//        TreeNode one = new TreeNode(1);
+//        TreeNode two = new TreeNode(2);
+//        TreeNode three = new TreeNode(3);
+//        TreeNode five = new TreeNode(5);
+//
+//
+//        TreeNode root = one;
+//        one.left = two;
+//        two.right = five;
+//        one.right = three;
+
         TreeNode three = new TreeNode(3);
-        TreeNode five = new TreeNode(5);
+        TreeNode nine = new TreeNode(9);
+        TreeNode twenty = new TreeNode(20);
+        TreeNode fiveteen = new TreeNode(15);
+        TreeNode seven  = new TreeNode(7);
 
+        TreeNode root = three;
+        three.left = nine;
+        three.right = twenty;
+        twenty.right = seven;
+        twenty.left = fiveteen;
 
-        TreeNode root = one;
-        one.left = two;
-        two.right = five;
-        one.right = three;
-        printAllNodes(root);
-//        System.out.println();
-//      int res = deepestLeavesSum(root);
-//        System.out.println(res);
-
-       List<List<Integer>> res =  zigzagLevelOrder(root);
+        List<List<Integer>> res =  levelOrderBottom(root);
         System.out.println(res);
+
     }
 
     public static void printAllNodes(TreeNode root) {
@@ -186,50 +192,87 @@ public class BFS {
 
 
     public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        if(root == null)return new ArrayList<>();
+        if (root == null) return new ArrayList<>();
         List<List<Integer>> zigzag = new ArrayList<>();
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
-        int count =0;
-        while(!queue.isEmpty()){
+        int count = 0;
+        while (!queue.isEmpty()) {
             int level = queue.size();
             count++;
-            if(count%2 == 0){
+            if (count % 2 == 0) {
                 List<Integer> list = new ArrayList<>();
-                for(int i=level-1; i>=0; i--){
+                for (int i = 0; i < level; i++) {
                     TreeNode node = queue.remove();
                     list.add(node.val);
 
-                    if(node.left != null){
+                    if (node.left != null) {
                         queue.add(node.left);
                     }
-                    if(node.right != null){
+                    if (node.right != null) {
                         queue.add(node.right);
                     }
 
                 }
-                zigzag.add(list);
+                System.out.println("list"+list);
+                List<Integer> rev = new ArrayList<>();
+                for (int i = list.size() - 1; i >= 0; i--) {
+                    rev.add(list.get(i));
+                }
+                System.out.println("rev"+rev);
+                zigzag.add(rev);
 
-            }else{
+            } else {
                 List<Integer> list = new ArrayList<>();
-                for(int i=0; i<level; i++){
+                for (int i = 0; i < level; i++) {
                     TreeNode node = queue.remove();
                     list.add(node.val);
 
-                    if(node.left != null){
+                    if (node.left != null) {
                         queue.add(node.left);
                     }
-                    if(node.right != null){
+                    if (node.right != null) {
                         queue.add(node.right);
                     }
 
                 }
                 zigzag.add(list);
             }
-            System.out.println(zigzag);
-
         }
         return zigzag;
+    }
+
+
+
+
+    public static List<List<Integer>> levelOrderBottom(TreeNode root) {
+        if(root == null) return new ArrayList<>();
+        List<List<Integer>> levelOrderBottom = new ArrayList<>();
+        Stack<List<Integer>> stack = new Stack<>();
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+//        stack.push(new ArrayList<Integer>(root.val));
+        while(!queue.isEmpty()){
+            int level = queue.size();
+            List<Integer> list = new ArrayList<>();
+            for(int i=0; i<level; i++){
+                TreeNode node = queue.remove();
+                list.add(node.val);
+                if(node.left != null){
+                    queue.add(node.left);
+                }
+                if(node.right != null){
+                    queue.add(node.right);
+                }
+            }
+            stack.push(list);
+        }
+        System.out.println(stack);
+
+
+
+        return levelOrderBottom;
     }
 }
