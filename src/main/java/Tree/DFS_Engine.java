@@ -1,15 +1,16 @@
 package Tree;
 
 import Leetcode.TreeNode;
+import com.sun.source.tree.Tree;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class DFS_Engine {
     static TreeNode prev = null;
     static String path = "";
     static List<String> capture = new ArrayList<>();
+     List<List<Integer>> capture1= new ArrayList<>();
+     List<Integer> list = new ArrayList<>();
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
@@ -18,13 +19,8 @@ public class DFS_Engine {
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
 
-
-//        printAllPaths(root);
-//        int res =countLeafNodes(root);
-//        int res =sumOfLeafNodes(root);
-//        System.out.println(res);
-
-       TreeNode res =  mirror(root);
+        DFS_Engine dfs = new DFS_Engine();
+        List<Integer> res = dfs.rightSideView(root);
         System.out.println(res);
 
 
@@ -136,4 +132,105 @@ public class DFS_Engine {
         }
         return null;
     }
+
+    public List<List<Integer>> allPaths(TreeNode root){
+        if(root == null){
+            return capture1;
+        }
+
+        list.add(root.val);
+        if(root.left == null && root.right == null){
+            List<Integer> adder = new ArrayList<>(list);
+            capture1.add(adder);
+        }else{
+            allPaths(root.left);
+            allPaths(root.right);
+        }
+
+        list.removeLast();
+        return capture1;
+    }
+
+    public List<Integer> rightSideView(TreeNode root){
+        List<Integer> list = new ArrayList<>();
+         int depth =depth(root);
+         right(root,depth,list);
+        return list;
+    }
+
+    public void right(TreeNode root,int depth,List<Integer> list){
+        if(root == null){
+            return ;
+        }
+        if(list.size() == depth){
+            return ;
+        }
+        list.add(root.val);
+        right(root.right,depth,list);
+        right(root.left,depth,list);
+
+    }
+
+    public int depth(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int left = depth(root.left);
+        int right = depth(root.right);
+        return Math.max(left,right)+1;
+    }
+
+    public List<List<Integer>> zigzagLevelOrder(TreeNode root){
+        if(root == null) return new ArrayList<>();
+
+        List<List<Integer>> container = new ArrayList<>();
+        int count =0;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while(!(queue.isEmpty())){
+            int levelElements = queue.size();
+            count++;
+            if(count%2==0){
+
+                Stack<Integer> stack = new Stack<>();
+
+                for(int i =0; i<levelElements; i++){
+                    TreeNode node = queue.remove();
+                    stack.push(node.val);
+
+                    if(node.left!=null)queue.add(node.left);
+                    if(node.right != null)queue.add(node.right);
+                }
+
+                List<Integer> list1 = new ArrayList<>();
+
+                while (!stack.isEmpty()){
+                    list1.add(stack.pop());
+                }
+
+                container.add(list1);
+
+            }else {
+                List<Integer> list1 = new ArrayList<>();
+
+                for(int i =0; i<levelElements; i++){
+                    TreeNode node = queue.remove();
+                    list1.add(node.val);
+
+                    if(node.left!=null)queue.add(node.left);
+                    if(node.right != null)queue.add(node.right);
+                }
+
+                container.add(list1);
+            }
+
+        }
+        return container;
+    }
+
+
+
+
 }
