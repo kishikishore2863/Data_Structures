@@ -8,10 +8,10 @@ import java.util.List;
 
 public class Contest {
     public static void main(String[] args) {
-        TreeNode one = new TreeNode();
-        TreeNode two = new TreeNode();
-        TreeNode three = new TreeNode();
-        TreeNode five = new TreeNode();
+        TreeNode one = new TreeNode(1);
+        TreeNode two = new TreeNode(2);
+        TreeNode three = new TreeNode(3);
+        TreeNode five = new TreeNode(5);
 
         TreeNode root = one;
         one.left = two;
@@ -49,28 +49,23 @@ public class Contest {
         System.out.println(root.val);
     }
 
-    String path ="";
-    List<String> list = new ArrayList<>();
     public List<String> binaryTreePaths(TreeNode root) {
-        i(root);;
-        System.out.println(list);
+        List<String> list = new ArrayList<>();
+        collectPaths(root, "", list);
         return list;
     }
 
-    public void i(TreeNode root){
-        if(root == null){
-            return;
-        }
+    public void collectPaths(TreeNode root, String path, List<String> list) {
+        if (root == null) return;
 
         path += root.val;
-        if(root.left == null && root.right == null){
-            String s = path;
-            list.add(s);
-        }else{
-            i(root.left);
-            i(root.right);
-        }
-        path = path.substring(0,path.length()-1);
 
+        if (root.left == null && root.right == null) {
+            list.add(path);
+        } else {
+            path += "->";
+            collectPaths(root.left, path, list);
+            collectPaths(root.right, path, list);
+        }
     }
 }
