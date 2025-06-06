@@ -2,6 +2,8 @@ package Graph;
 
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Reeverse {
     public static void main(String[] args) {
@@ -24,10 +26,11 @@ public class Reeverse {
 //        System.out.println(isPalindrome(arr3));
 //        System.out.println(isPalindrome(arr4));
 
-        int[] arr = {1, 2, 3, 4};
-        int res =sumArray(arr, arr.length-1); // Output: 10
-        System.out.println(res);
+        int[] arr = {1, 2, 3};
+//        subArray(arr);
 
+        System.out.println("Subsets:");
+        generateSubsets(arr);
 
     }
 
@@ -101,7 +104,42 @@ public class Reeverse {
         int sum = sumArray(arr,index-1);
         return sum+arr[index];
     }
-    
+
+   public static void  subArray(int[] arr){
+        for(int start =0; start<arr.length; start++){
+            int end =start;
+            while (end<arr.length){
+                for (int i=start; i <= end; i++){
+                    System.out.print(arr[i]+"");
+                }
+                System.out.println();
+                end++;
+            }
+        }
+   }
+
+
+   public static void generateSubsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrackSubsets(nums, 0, new ArrayList<>(), result);
+
+        for (List<Integer> subset : result) {
+            System.out.println(subset);
+        }
+    }
+
+    private static void backtrackSubsets(int[] nums, int index, List<Integer> path, List<List<Integer>> result) {
+        result.add(new ArrayList<>(path));
+        System.out.println("res"+result);
+
+        for (int i = index; i < nums.length; i++) {
+            path.add(nums[i]);
+            System.out.println(path);
+            backtrackSubsets(nums, i + 1, path, result);
+            path.remove(path.size() - 1);
+            System.out.println(path);
+        }
+    }
 
 
 
