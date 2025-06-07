@@ -125,19 +125,21 @@ public class Reeverse {
 
         for (List<Integer> subset : result) {
             System.out.println(subset);
+
         }
     }
 
     private static void backtrackSubsets(int[] nums, int index, List<Integer> path, List<List<Integer>> result) {
         result.add(new ArrayList<>(path));
-        System.out.println("res"+result);
+        System.out.println("Add subset to result: " + path);
 
         for (int i = index; i < nums.length; i++) {
             path.add(nums[i]);
-            System.out.println(path);
+            System.out.println("Added: " + nums[i] + ", Path now: " + path);
             backtrackSubsets(nums, i + 1, path, result);
+            System.out.println("Backtracking from: " + path.get(path.size() - 1) + ", Path before removing: " + path);
             path.remove(path.size() - 1);
-            System.out.println(path);
+            System.out.println("Path after removing: " + path);
         }
     }
 
