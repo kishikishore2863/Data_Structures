@@ -8,6 +8,7 @@ public class Q3 {
         int[] nums = {4,5,2,10,8};
         int[] res = nearestLeftSmallerOptimized(nums);
         System.out.println(Arrays.toString(res));
+
     }
 
     public static int[] nearestLeftSmaller(int[] nums){
@@ -51,4 +52,7 @@ public class Q3 {
         }
         return res;
     }
+
+
+
 }
