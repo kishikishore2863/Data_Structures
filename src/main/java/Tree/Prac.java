@@ -2,9 +2,7 @@ package Tree;
 
 import Leetcode.TreeNode;
 
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class Prac {
     public static void main(String[] args) {
@@ -32,21 +30,34 @@ public class Prac {
       Prac p = new Prac();
 //      p.hasPathSum(root);
 
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(5);
-        queue.add(7);
-        queue.add(3);
-        queue.add(4);
-        queue.add(5);
-        System.out.println(queue);
-        queue.remove();
-        System.out.println(queue);
+//        Queue<Integer> queue = new LinkedList<>();
+//        queue.add(5);
+//        queue.add(7);
+//        queue.add(3);
+//        queue.add(4);
+//        queue.add(5);
+//        System.out.println(queue);
+//        queue.remove();
+//        System.out.println(queue);
+//
+//        Queue<String> qu1 = new PriorityQueue<>();
+//        qu1.add("n");
+//        qu1.add("x");
+//        qu1.add("a");
+//        System.out.println(qu1);
 
-        Queue<String> qu1 = new PriorityQueue<>();
-        qu1.add("n");
-        qu1.add("x");
-        qu1.add("a");
-        System.out.println(qu1);
+
+        Set<Integer> set = new HashSet<>();
+        set.add(11);
+        set.add(2);
+        set.add(2);
+        set.add(42);
+        set.add(5);
+        set.add(5);
+        set.add(5);
+        System.out.println(set);
+        System.out.println(set.contains(5));
+
 
 
 
