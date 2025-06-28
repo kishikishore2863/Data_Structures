@@ -3,7 +3,6 @@ package Tree;
 import Leetcode.TreeNode;
 
 public class GoodNodes {
-     static int count =0;
     public static void main(String[] args) {
         TreeNode three = new TreeNode(3);
         TreeNode three1 = new TreeNode(3);
@@ -25,21 +24,21 @@ public class GoodNodes {
     }
 
     public int goodNodes(TreeNode root) {
-        if(root == null )return 0;
-
-
-        good(root,root.val);
-        return count;
-
+        return dfs(root, Integer.MIN_VALUE);
     }
 
-    public void good(TreeNode root ,int rootVal){
-        if(root == null )return ;
+    private int dfs(TreeNode node, int maxSoFar) {
+        if (node == null) return 0;
 
-        if(root.val >= rootVal){
-            count++;
+        int count = 0;
+        if (node.val >= maxSoFar) {
+            count = 1;
         }
-        good(root.left,rootVal);
-        good(root.right,rootVal);
+
+        int newMax = Math.max(maxSoFar, node.val);
+        count += dfs(node.left, newMax);
+        count += dfs(node.right, newMax);
+        return count;
     }
+
 }
