@@ -2,6 +2,9 @@ package Tree;
 
 import Leetcode.TreeNode;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GoodNodes {
     public static void main(String[] args) {
         TreeNode three = new TreeNode(3);
@@ -39,6 +42,10 @@ public class GoodNodes {
         count += dfs(node.left, newMax);
         count += dfs(node.right, newMax);
         return count;
+
+
+
+
     }
 
 }
