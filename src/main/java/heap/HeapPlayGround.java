@@ -14,11 +14,9 @@ public class HeapPlayGround {
         heap.add(3);
         heap.add(20);
         heap.add(15);
-//        System.out.println(heap);
-
-//        System.out.println(HeapPlayGround.kthLargestElement(new int[]{7,10,4,3,20,15},3));
-
-        printer();
+        System.out.println(heap);
+        int unknow = heap.poll();
+        System.out.println(unknow);
 
     }
 
@@ -46,6 +44,28 @@ public class HeapPlayGround {
             }
             System.out.println();
         }
+    }
+
+    public int[] numberGame(int[] nums) {
+        List<Integer> list = new ArrayList<>();
+        Queue<Integer> heap = new PriorityQueue<>();
+
+        while(!heap.isEmpty()){
+            int alice = heap.poll();
+            int bob = heap.poll();
+            list.add(bob);
+            list.add(alice);
+        }
+
+        int[] arr = new int[nums.length];
+        int start=0;
+
+        for(Integer e:list){
+            arr[start]=e;
+            start++;
+        }
+
+        return arr;
     }
 
 }
