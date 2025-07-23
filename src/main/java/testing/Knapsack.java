@@ -1,17 +1,23 @@
 package testing;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Knapsack {
     public static void main(String[] args) {
         Knapsack knapsack = new Knapsack();
-        int [] weights = {1,2,3,4,5};
-        int [] prices = {1,10,4,5,7};
+//        int [] weights = {1,2,3,4,5};
+        int [] weights = {1,3,4,5};
+//        int [] prices = {1,10,4,5,7};
+        int [] prices = {1,4,5,7};
+//        int bagMaxWeight = 7;
         int bagMaxWeight = 7;
-        int n = 5;
+//        int n = 5;
+        int n = 4;
 
         int [][] t = new int[n+1][bagMaxWeight+1];
-        knapsack.minset(t,-1,t.length,bagMaxWeight+1);
+        knapsack.minSet(t,-1,t.length,bagMaxWeight+1);
 
         int res = knapsack.solve(weights,prices,bagMaxWeight,n,t);
         System.out.println(res);
@@ -41,7 +47,7 @@ public class Knapsack {
         }
     }
 
-    public void minset(int [][] t, int val ,int n, int bag){
+    public void minSet(int [][] t, int val ,int n, int bag){
         for(int i=0; i<n; i++){
             for(int j=0; j<bag; j++){
                 t[i][j]=val;
