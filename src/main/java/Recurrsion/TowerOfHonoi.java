@@ -4,7 +4,7 @@ public class TowerOfHonoi {
 
     public static void main(String[] args) {
         int n = 3;
-        solveTowerOfHanoi(n, 'A', 'B', 'C');
+        solveTowerOfHanoi(n, 'S', 'A', 'D');
     }
 
     public static void solveTowerOfHanoi(int n, char source, char auxiliary, char destination) {
