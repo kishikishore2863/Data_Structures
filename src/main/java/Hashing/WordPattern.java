@@ -1,48 +1,40 @@
 package Hashing;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class WordPattern {
     public static void main(String[] args) {
         WordPattern ob = new WordPattern();
-        boolean res = ob.wordPattern("abba","dog cat cat dog");
+        boolean res = ob.wordPattern("abba", "dog cat cat dog");
         System.out.println(res);
     }
 
     public boolean wordPattern(String pattern, String s) {
+        String[] words = s.split(" ");
 
-        Map<Character, String> map = new HashMap<>();
-        List<String> list = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-        for (int j = 0; j < s.length(); j++) {
-            if (s.charAt(j) != ' ') {
-                sb.append(s.charAt(j));
-            } else {
-                list.add(sb.toString());
-                sb= new StringBuilder();
-            }
-            if(j == s.length()-1){
-                list.add(sb.toString());
-            }
-
+        if (pattern.length() != words.length) {
+            return false;
         }
-        System.out.println(list);
+
+        HashMap<Character, String> charToWord = new HashMap<>();
+        Set<String> seenWords = new HashSet<>();
+
         for (int i = 0; i < pattern.length(); i++) {
-            System.out.println(map);
-            if (map.containsKey(pattern.charAt(i))) {
-                String value = map.get(pattern.charAt(i));
-                if (!(value.equals(list.get(i)))) return false;
+            char c = pattern.charAt(i);
+            String w = words[i];
+
+            if (charToWord.containsKey(c)) {
+                if (!charToWord.get(c).equals(w)) {
+                    return false;
+                }
+            } else {
+                if (seenWords.contains(w)) {
+                    return false;
+                }
+                charToWord.put(c, w);
+                seenWords.add(w);
             }
-            map.put(pattern.charAt(i), list.get(i));
         }
-
-
-
         return true;
-
-
     }
 }
